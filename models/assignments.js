@@ -5,7 +5,7 @@ var studentSchema = new Schema({
   student_name: String,
   assignment_number: Number,
   score: Number,
-  date_completed: Number
+  date_completed: Date
 });
 
 // users is the name of the collection in the database
