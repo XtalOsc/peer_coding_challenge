@@ -18,19 +18,28 @@ app.listen('9001', function(){
 });//end server spinup
 
 
-app.get('/all', function(req,res){
-  Student.find({}, function(err, studentResults) {
-      if(err){
-        console.log('error occurred:', err);
-        res.sendStatus(500);
-      }//end if
-      else{
-        console.log('student Results',studentResults);
-        res.send(studentResults);
-      }//end else
-    });//end function
+app.get('/all/:id?', function(req,res){
+  console.log('req.params ',req.params);
+  var studentQuery;
+  if(req.params.id){
+    console.log('if');
+    studentQuery = {"_id":req.params.id};
+  }//end if
+  else{
+    console.log('else');
+    studentQuery = {};
+  }//end else
+  Student.find(studentQuery, function(err, studentResults) {
+    if(err){
+      console.log('error occurred:', err);
+      res.sendStatus(500);
+    }//end if in student find
+    else{
+      console.log('student Results',studentResults);
+      res.send(studentResults);
+    }//end else in student find
+  });//end function
 });//end all
-
 
 app.post('/create', function(req,res){
 console.log('in create');
